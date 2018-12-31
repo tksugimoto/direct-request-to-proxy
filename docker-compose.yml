@@ -9,3 +9,11 @@ services:
       - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
     environment:
       - resolution_ip=${DNSMASQ_RESOLUTION_IP:-127.2.3.4}
+
+  http-server:
+    build:
+      context: ./http-server/
+    ports:
+      - "${HTTP_SERVER_BIND_IP_PORT:-127.2.3.4:80}:80"
+    environment:
+      - http_proxy
