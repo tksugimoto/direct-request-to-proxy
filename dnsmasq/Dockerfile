@@ -8,4 +8,5 @@ CMD ["sh", "-cx", "dnsmasq \
     --address=/#/${resolution_ip} \
     --no-hosts \
     --no-resolv \
+    --log-queries \
 "]
