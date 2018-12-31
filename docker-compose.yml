@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  dnsmasq:
+    build:
+      context: ./dnsmasq/
+    ports:
+      - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53"
+      - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
+    environment:
+      - resolution_ip=${DNSMASQ_RESOLUTION_IP:-127.2.3.4}
