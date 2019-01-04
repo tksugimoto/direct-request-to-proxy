@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  dnsmasq:
+  dns-server:
     build:
-      context: ./dnsmasq/
+      context: ./dns-server/
     ports:
       - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53"
       - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
