@@ -8,13 +8,13 @@ services:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53"
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
     environment:
-      - resolution_ip=${DNS_RESOLUTION_IP:-127.2.3.4}
+      - resolution_ip=${FORWARDING_SERVER_BIND_IP:-127.2.3.4}
 
   http-server:
     build:
       context: ./http-server/
     ports:
-      - "${DNS_RESOLUTION_IP:-127.2.3.4}:80:80"
+      - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
       - http_proxy
 
@@ -22,6 +22,6 @@ services:
     build:
       context: ./https-server/
     ports:
-      - "${DNS_RESOLUTION_IP:-127.2.3.4}:443:443"
+      - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
       - https_proxy
