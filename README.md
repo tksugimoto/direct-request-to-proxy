@@ -35,11 +35,18 @@
     - `.env` に書いた `DNS_SERVER_BIND_IP` 変数の値に変更
 
 ## 仕組み
-1. DNSサーバーをローカルで動かして、すべてのドメイン名をローカルのIPに名前解決する
-    - ローカルのIP: `FORWARDING_SERVER_BIND_IP`
-1. ローカルIPHTTP(S)サーバーでリクエストを受け付けてプロキシサーバーへ転送
+1. （HTTPプロキシに対応していない）Clientアプリはローカルで動いているDNSサーバーに名前解決要求を出す
+    - ※ DNSサーバーの設定はOS側で変更する必要がある
+    - ローカルで動いているDNSサーバーのIP（例）: `127.0.0.1:53`
+2. DNSサーバーはすべてのドメイン名をローカルのIPに名前解決する
+    - ローカルのIP
+        - 設定キー: `FORWARDING_SERVER_BIND_IP`
+        - 例: `127.2.3.4`
+3. Clientアプリは名前解決で得られたローカルのIPの80/443番ポートにHTTP/HTTPSリクエスト
+4. ローカルのIPで動いているHTTP(S)サーバーはプロキシ処理可能なリクエストに変換してからプロキシサーバーへリクエスト
     - HTTP: Host Header から実際の接続先FQDNを取得
     - HTTPS: TLS Handshake の 拡張 (Server Name Indication) から実際の接続先FQDNを取得
+5. プロキシサーバーが代理で元のリクエスト先にリクエスト
 
 ![構成図](docs/image/configuration_diagram.png)
 
