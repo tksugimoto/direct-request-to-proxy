@@ -41,6 +41,8 @@
     - HTTP: Host Header から実際の接続先FQDNを取得
     - HTTPS: TLS Handshake の 拡張 (Server Name Indication) から実際の接続先FQDNを取得
 
+![構成図](docs/image/configuration_diagram.png)
+
 ## 制約
 - FQDN（≒ドメイン名）での通信であること
     - IPアドレスでの通信は名前解決がされなく通信に割り込めないため非対応
