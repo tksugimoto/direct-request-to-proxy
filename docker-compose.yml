@@ -5,16 +5,16 @@ services:
     build:
       context: ./dns-server/
     ports:
-      - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53"
-      - "${DNSMASQ_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
+      - "${DNS_SERVER_BIND_IP_PORT:-127.0.0.1:53}:53"
+      - "${DNS_SERVER_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
     environment:
-      - resolution_ip=${DNSMASQ_RESOLUTION_IP:-127.2.3.4}
+      - resolution_ip=${DNS_RESOLUTION_IP:-127.2.3.4}
 
   http-server:
     build:
       context: ./http-server/
     ports:
-      - "${DNSMASQ_RESOLUTION_IP:-127.2.3.4}:80:80"
+      - "${DNS_RESOLUTION_IP:-127.2.3.4}:80:80"
     environment:
       - http_proxy
 
@@ -22,6 +22,6 @@ services:
     build:
       context: ./https-server/
     ports:
-      - "${DNSMASQ_RESOLUTION_IP:-127.2.3.4}:443:443"
+      - "${DNS_RESOLUTION_IP:-127.2.3.4}:443:443"
     environment:
       - https_proxy
