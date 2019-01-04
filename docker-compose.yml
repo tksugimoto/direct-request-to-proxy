@@ -5,8 +5,8 @@ services:
     build:
       context: ./dns-server/
     ports:
-      - "${DNS_SERVER_BIND_IP_PORT:-127.0.0.1:53}:53"
-      - "${DNS_SERVER_BIND_IP_PORT:-127.0.0.1:53}:53/udp"
+      - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53"
+      - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
     environment:
       - resolution_ip=${DNS_RESOLUTION_IP:-127.2.3.4}
 
