@@ -9,6 +9,7 @@ services:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
     environment:
       - resolution_ip=${FORWARDING_SERVER_BIND_IP:-127.2.3.4}
+    restart: always
 
   http-server:
     build:
@@ -17,6 +18,7 @@ services:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
       - http_proxy
+    restart: always
 
   https-server:
     build:
@@ -25,3 +27,4 @@ services:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
       - https_proxy
+    restart: always
