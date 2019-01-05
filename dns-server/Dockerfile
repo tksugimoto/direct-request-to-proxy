@@ -7,6 +7,7 @@ CMD ["sh", "-cx", "dnsmasq \
     -d \
     --address=/#/${resolution_ip} \
     --no-hosts \
-    --no-resolv \
+    $(printf -- '--server=/%s/# ' ${no_proxy_domains}) \
     --log-queries \
+    --dns-loop-detect \
 "]
