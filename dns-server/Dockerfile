@@ -7,6 +7,7 @@ CMD ["sh", "-cx", "dnsmasq \
     -d \
     --address=/#/${resolution_ip} \
     --no-hosts \
-    --no-resolv \
+    --server=/intra.example.com/# \
+    --server=/intra.example.net/# \
     --log-queries \
 "]
