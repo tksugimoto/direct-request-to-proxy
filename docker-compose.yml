@@ -9,6 +9,7 @@ services:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
     environment:
       - resolution_ip=${FORWARDING_SERVER_BIND_IP:-127.2.3.4}
+      - no_proxy_domains=${NO_PROXY_DOMAINS:-intra.example.com intra.example.net}
     restart: always
 
   http-server:
