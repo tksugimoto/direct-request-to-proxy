@@ -9,4 +9,5 @@ CMD ["sh", "-cx", "dnsmasq \
     --no-hosts \
     $(printf -- '--server=/%s/# ' ${no_proxy_domains}) \
     --log-queries \
+    --dns-loop-detect \
 "]
