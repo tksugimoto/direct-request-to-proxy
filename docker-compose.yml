@@ -4,6 +4,9 @@ services:
   dns-server:
     build:
       context: ./dns-server/
+      args:
+        - http_proxy
+        - https_proxy
     ports:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53"
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
