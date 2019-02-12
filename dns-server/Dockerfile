@@ -1,6 +1,6 @@
-FROM centos:7.6.1810
+FROM alpine:3.9
 
-RUN yum -y install dnsmasq
+RUN apk --update --no-cache add dnsmasq
 
 # 環境変数を展開するため sh 経由で dnsmasq を実行する
 CMD ["sh", "-cx", "dnsmasq \

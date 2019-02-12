@@ -1,4 +1,4 @@
-FROM node:8.15
+FROM node:10-alpine
 
 COPY ./index.js /opt/http-server/
 
