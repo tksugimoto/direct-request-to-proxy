@@ -1,4 +1,4 @@
-FROM node:8.15
+FROM node:8.15-alpine
 
 COPY ./index.js /opt/https-server/
 COPY ./lib/     /opt/https-server/lib/
