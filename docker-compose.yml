@@ -20,6 +20,9 @@ services:
   http-server:
     build:
       context: ./http-server/
+      args:
+        - http_proxy
+        - https_proxy
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
@@ -29,6 +32,9 @@ services:
   https-server:
     build:
       context: ./https-server/
+      args:
+        - http_proxy
+        - https_proxy
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
