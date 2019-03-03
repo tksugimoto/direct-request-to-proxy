@@ -31,6 +31,7 @@ services:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
+      - TZ
       - http_proxy
     restart: always
     logging:
@@ -48,6 +49,7 @@ services:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
+      - TZ
       - https_proxy
     restart: always
     logging:
