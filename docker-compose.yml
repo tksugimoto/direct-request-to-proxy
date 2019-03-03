@@ -16,6 +16,11 @@ services:
     dns:
       - ${ORIGINAL_DNS_SERVER_IP}
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10mb"
+        max-file: "3"
 
   http-server:
     build:
@@ -28,6 +33,11 @@ services:
     environment:
       - http_proxy
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10mb"
+        max-file: "3"
 
   https-server:
     build:
@@ -40,3 +50,8 @@ services:
     environment:
       - https_proxy
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10mb"
+        max-file: "3"
