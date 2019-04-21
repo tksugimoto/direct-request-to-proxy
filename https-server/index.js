@@ -44,12 +44,20 @@ httpsServer.on('connection', (clientSocket) => {
         const clientHello = TlsClientHello.parse(dataBuffer);
 
         const serverNameExtension = clientHello.tlsPlaintextFlagment.handshakeBody.extensionData.find(extension => extension.type === ExtensionValues.SERVER_NAME);
-        if (!serverNameExtension) return;
+        if (!serverNameExtension) {
+            log('Request error: (Server Name Indication) SERVER_NAME(0) not found');
+            clientSocket.end();
+            return;
+        }
         const serverNameExtensionDataExtractor = new BufferExtractor(serverNameExtension.data);
         // Server Name Indication Length を読み取って捨てる
         serverNameExtensionDataExtractor.extract(2);
         const nameType = serverNameExtensionDataExtractor.extractAsInt(1);
-        if (nameType !== ServerNameType.HOST_NAME) return;
+        if (nameType !== ServerNameType.HOST_NAME) {
+            log('Request error: (Server Name Indication) HOST_NAME(0) not found');
+            clientSocket.end();
+            return;
+        }
         const {
             value: hostnameBuffer,
         } = serverNameExtensionDataExtractor.extractVariableField(2);
