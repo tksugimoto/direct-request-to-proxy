@@ -85,7 +85,7 @@ httpsServer.on('connection', (clientSocket) => {
         proxyServerSocket.on('error', err => {
             log(`Proxy Server Socket error: ${err.message}`);
             console.error(err);
-            clientSocket.end(err.message);
+            clientSocket.end();
         });
         clientSocket.on('error', err => {
             log(`Client Socket error: ${err.message}`);
