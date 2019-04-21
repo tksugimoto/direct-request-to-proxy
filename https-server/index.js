@@ -66,6 +66,7 @@ httpsServer.on('connection', (clientSocket) => {
                 const [/* version */, statusCode] = statusLine.split(' ');
                 if (statusCode !== '200') {
                     console.error(statusLine);
+                    clientSocket.end();
                     return;
                 }
                 proxyServerSocket.write(dataBuffer);
