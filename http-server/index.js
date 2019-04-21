@@ -55,7 +55,7 @@ httpServer.on('connection', (clientSocket) => {
             clientSocket.end();
         });
         clientSocket.on('error', () => {
-            proxyServerSocket.destroy();
+            proxyServerSocket.end();
         });
     });
     clientSocket.on('error', err => {
