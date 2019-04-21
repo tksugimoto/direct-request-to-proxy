@@ -87,11 +87,13 @@ httpsServer.on('connection', (clientSocket) => {
             console.error(err);
             clientSocket.end();
         });
-        clientSocket.on('error', err => {
-            log(`Client Socket error: ${err.message}`);
-            console.error(err);
+        clientSocket.on('error', () => {
             proxyServerSocket.destroy();
         });
+    });
+    clientSocket.on('error', err => {
+        log(`Client Socket error: ${err.message}`);
+        console.error(err);
     });
 });
 
