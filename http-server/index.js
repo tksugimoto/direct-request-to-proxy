@@ -34,7 +34,11 @@ httpServer.on('connection', (clientSocket) => {
     clientSocket.once('data', dataBuffer => {
         const httpRequestArray = dataBuffer.toString().split(CRLF);
         const hostHeader = httpRequestArray.find(header => header.startsWith('Host:'));
-        if (!hostHeader) return;
+        if (!hostHeader) {
+            log('Request error: Host header not found');
+            clientSocket.end();
+            return;
+        }
 
         const proxyServerSocket = net.createConnection(httpProxyPort, httpProxyHost);
         proxyServerSocket.once('connect', () => {
