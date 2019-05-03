@@ -9,9 +9,9 @@
 ## 使い方
 1. [docker, docker-compose をインストール](https://docs.docker.com/install/#supported-platforms)
 1. 設定
-    1. 設定ファイルを作成: `.env.sample` を `.env` にコピー
+    1. 設定ファイルを作成: `.env.example` を `.env` にコピー
         ```sh
-        cp .env.sample .env
+        cp .env.example .env
         ```
     1. 設定ファイル `.env` を必要に応じて編集
         - ※ Docker Machine を使っている場合は、`DNS_SERVER_BIND_IP`, `FORWARDING_SERVER_BIND_IP` には `127.0.0.0/8` のIPではなく、 `docker-machine ip` で得られるIPを設定する必要がある
