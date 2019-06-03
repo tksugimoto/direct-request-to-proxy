@@ -11,8 +11,8 @@ services:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53"
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
     environment:
-      - resolution_ip=${FORWARDING_SERVER_BIND_IP:-127.2.3.4}
-      - no_proxy_domains=${NO_PROXY_DOMAINS:-intra.example.com intra.example.net}
+      resolution_ip: ${FORWARDING_SERVER_BIND_IP:-127.2.3.4}
+      no_proxy_domains: ${NO_PROXY_DOMAINS:-intra.example.com intra.example.net}
     dns:
       - ${ORIGINAL_DNS_SERVER_IP}
     restart: always
@@ -31,8 +31,8 @@ services:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
-      - TZ
-      - http_proxy
+      TZ:
+      http_proxy:
     restart: always
     logging:
       driver: "json-file"
@@ -49,8 +49,8 @@ services:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
-      - TZ
-      - https_proxy
+      TZ:
+      https_proxy:
     restart: always
     logging:
       driver: "json-file"
