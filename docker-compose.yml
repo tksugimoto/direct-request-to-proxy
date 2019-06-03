@@ -5,8 +5,8 @@ services:
     build:
       context: ./dns-server/
       args:
-        - http_proxy
-        - https_proxy
+        http_proxy:
+        https_proxy:
     ports:
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53"
       - "${DNS_SERVER_BIND_IP:-127.0.0.1}:53:53/udp"
@@ -26,8 +26,8 @@ services:
     build:
       context: ./http-server/
       args:
-        - http_proxy
-        - https_proxy
+        http_proxy:
+        https_proxy:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:80:80"
     environment:
@@ -44,8 +44,8 @@ services:
     build:
       context: ./https-server/
       args:
-        - http_proxy
-        - https_proxy
+        http_proxy:
+        https_proxy:
     ports:
       - "${FORWARDING_SERVER_BIND_IP:-127.2.3.4}:443:443"
     environment:
