@@ -68,7 +68,8 @@ httpsServer.on('connection', (clientSocket) => {
                 const hostname = hostnameBuffer.toString();
                 log(`forward request to ${hostname}`);
 
-                proxyServerSocket.write(`CONNECT ${hostname}:${HTTPS_PORT} HTTP/1.0${CRLF}${CRLF}`);
+                proxyServerSocket.write(`CONNECT ${hostname}:${HTTPS_PORT} HTTP/1.0${CRLF}`);
+                proxyServerSocket.write(CRLF);
                 proxyServerSocket.once('data', data => {
                     const response = data.toString();
                     const statusLine = response.split(CRLF)[0];
