@@ -9,6 +9,7 @@ assert(process.env.http_proxy, 'http_proxy env ("http://hostname:port") required
 const {
     hostname: httpProxyHost,
     port: httpProxyPort,
+    auth: httpProxyAuth,
 } = parseUrl(process.env.http_proxy);
 
 
@@ -45,6 +46,9 @@ httpServer.on('connection', (clientSocket) => {
             const hostname = hostHeader.slice('Host:'.length).trim().replace(/:.*/, '');
             log(`forward request to ${hostname}`);
             httpRequestArray[0] = httpRequestArray[0].replace(' ', ` http://${hostname}`);
+            if (httpProxyAuth) {
+                httpRequestArray.splice(1, 0, `Proxy-Authorization: Basic ${Buffer.from(httpProxyAuth).toString('base64')}`);
+            }
             proxyServerSocket.write(httpRequestArray.join(CRLF));
             clientSocket.pipe(proxyServerSocket);
             proxyServerSocket.pipe(clientSocket);
