@@ -12,6 +12,7 @@ assert(process.env.https_proxy, 'https_proxy env ("http://hostname:port") requir
 const {
     hostname: httpsProxyHost,
     port: httpsProxyPort,
+    auth: httpsProxyAuth,
 } = parseUrl(process.env.https_proxy);
 
 
@@ -69,6 +70,9 @@ httpsServer.on('connection', (clientSocket) => {
                 log(`forward request to ${hostname}`);
 
                 proxyServerSocket.write(`CONNECT ${hostname}:${HTTPS_PORT} HTTP/1.0${CRLF}`);
+                if (httpsProxyAuth) {
+                    proxyServerSocket.write(`Proxy-Authorization: Basic ${Buffer.from(httpsProxyAuth).toString('base64')}${CRLF}`);
+                }
                 proxyServerSocket.write(CRLF);
                 proxyServerSocket.once('data', data => {
                     const response = data.toString();
