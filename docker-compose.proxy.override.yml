@@ -1,0 +1,12 @@
+version: '3'
+
+# build arg も上書きしたほうが良いかも？
+
+services:
+  http-server:
+    environment:
+      http_proxy: "${http_proxy_with_auth}"
+
+  https-server:
+    environment:
+      https_proxy: "${https_proxy_with_auth}"
