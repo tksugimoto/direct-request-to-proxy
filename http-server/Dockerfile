@@ -1,11 +1,13 @@
-FROM node:10-alpine
+FROM node:12-alpine
 
-RUN apk --update add --no-cache tini
+RUN apk add --update-cache --no-cache tini
 ENTRYPOINT ["/sbin/tini", "--"]
 
 # TZ環境変数でタイムゾーンを変更できるようにするため
-RUN apk --update --no-cache add tzdata
+RUN apk add --update-cache --no-cache tzdata
 
-COPY ./index.js /opt/http-server/
+CMD ["node", "./index.js"]
 
-CMD ["node", "/opt/http-server/index.js"]
+WORKDIR /root/
+
+COPY ./index.js ./

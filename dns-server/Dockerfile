@@ -1,6 +1,6 @@
-FROM alpine:3.9
+FROM alpine:3.10
 
-RUN apk --update --no-cache add dnsmasq
+RUN apk add --update-cache --no-cache dnsmasq
 
 # 環境変数を展開するため sh 経由で dnsmasq を実行する
 CMD ["sh", "-cx", "dnsmasq \
