@@ -6,6 +6,8 @@ ENTRYPOINT ["/sbin/tini", "--"]
 # TZ環境変数でタイムゾーンを変更できるようにするため
 RUN apk add --update-cache --no-cache tzdata
 
-COPY ./index.js /opt/http-server/
+WORKDIR /root/
 
-CMD ["node", "/opt/http-server/index.js"]
+COPY ./index.js ./
+
+CMD ["node", "./index.js"]
