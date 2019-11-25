@@ -33,6 +33,9 @@ const httpServer = net.createServer();
 
 httpServer.on('connection', (clientSocket) => {
     clientSocket.once('data', dataBuffer => {
+        // 非同期処理をするときは flowing mode から paused mode に切り替えないと、クライアントから来るデータが分割されている場合失われる可能性がある(HTTP Header と Body が分割された場合など)
+        clientSocket.pause();
+
         const httpRequestArray = dataBuffer.toString().split(CRLF);
         const hostHeader = httpRequestArray.find(header => header.startsWith('Host:'));
         if (!hostHeader) {
