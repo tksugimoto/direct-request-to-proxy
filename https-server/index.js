@@ -18,6 +18,8 @@ const {
 
 const CRLF = '\r\n';
 const HTTPS_PORT = 443;
+// テスト時などに待ち受けポートを変更できるようにする
+const LISTEN_PORT = Number(process.env.LISTEN_PORT) || HTTPS_PORT;
 const ExtensionValues = {
     SERVER_NAME: 0,
 };
@@ -108,4 +110,4 @@ httpsServer.on('connection', (clientSocket) => {
     });
 });
 
-httpsServer.listen(HTTPS_PORT, '0.0.0.0');
+httpsServer.listen(LISTEN_PORT, '0.0.0.0');

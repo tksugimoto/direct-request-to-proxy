@@ -15,6 +15,8 @@ const {
 
 const CRLF = '\r\n';
 const HTTP_PORT = 80;
+// テスト時などに待ち受けポートを変更できるようにする
+const LISTEN_PORT = Number(process.env.LISTEN_PORT) || HTTP_PORT;
 
 const currentTime = () => {
     const date = new Date();
@@ -68,4 +70,4 @@ httpServer.on('connection', (clientSocket) => {
     });
 });
 
-httpServer.listen(HTTP_PORT, '0.0.0.0');
+httpServer.listen(LISTEN_PORT, '0.0.0.0');
